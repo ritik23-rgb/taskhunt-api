@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskHunt | GLA University Campus Gamification</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/theme.css">
+    <style>
+        .role-choice-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 16px;
+            padding: 14px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .role-choice-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(168, 85, 247, 0.6);
+            background: rgba(139, 92, 246, 0.12);
+        }
+        .role-choice-card.selected {
+            border-color: #ec4899;
+            background: linear-gradient(145deg, rgba(139, 92, 246, 0.28), rgba(236, 72, 153, 0.22));
+            box-shadow: 0 10px 24px rgba(236, 72, 153, 0.28);
+        }
+        .auth-tabs {
+            background: rgba(255, 255, 255, 0.06);
+            padding: 5px;
+            border-radius: 14px;
+            display: flex;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+        .auth-tab-btn {
+            flex: 1; border: none; background: transparent; color: #cbd5e1;
+            font-weight: 700; padding: 10px; border-radius: 10px; transition: all 0.25s ease;
+        }
+        .auth-tab-btn.active {
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            color: #fff;
+            box-shadow: 0 6px 18px rgba(236, 72, 153, 0.35);
+        }
+        .gla-tag {
+            background: rgba(16, 185, 129, 0.16);
+            border: 1px solid rgba(52, 211, 153, 0.4);
+            color: #6ee7b7;
+            font-size: 0.76rem;
+            padding: 4px 11px;
+            border-radius: 50px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-glass fixed-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2 fs-4" href="#">
+                <span class="d-inline-flex align-items-center justify-content-center rounded-3 text-white"
+                      style="width:38px; height:38px; background: linear-gradient(135deg, #8b5cf6, #ec4899);">
+                    <i class="bi bi-trophy-fill fs-5"></i>
+                </span>
+                <span class="brand-font brand-pill">TaskHunt</span>
+                <span class="gla-tag d-none d-sm-inline">GLA University</span>
+            </a>
+            <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-outline-light rounded-pill px-3" onclick="switchAuthTab('login')">Sign In</button>
+                <button class="btn btn-sm btn-neon-primary rounded-pill px-4" onclick="switchAuthTab('register')">Join Campus</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="min-vh-100 d-flex align-items-center" style="padding-top: 96px; padding-bottom: 60px;">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <!-- Left Hero -->
+                <div class="col-lg-6 anim-card">
+                    <span class="badge rounded-pill px-3 py-2 mb-3" style="background: rgba(139, 92, 246, 0.22); border: 1px solid rgba(168, 85, 247, 0.45); color: #e9d5ff;">
+                        <i class="bi bi-stars text-warning me-1"></i> Official @gla.ac.in Gamification Arena
+                    </span>
+                    <h1 class="display-4 fw-bold lh-sm mb-3">
+                        Race Campus Quests.<br>
+                        Win <span class="text-gradient">XP & VIP Passes</span>.
+                    </h1>
+                    <p class="lead mb-4" style="color: #cbd5e1;">
+                        Accept faculty or club bounties before the deadline, upload image proof first to win the XP reward, climb the live GLA Rank Board, and redeem unique VIP event tickets.
+                    </p>
+
+                    <div class="row g-3">
+                        <div class="col-4">
+                            <div class="glass-panel p-3 text-center">
+                                <i class="bi bi-stopwatch-fill fs-4 text-info"></i>
+                                <div class="fw-bold small mt-1">First-Win Race</div>
+                                <small class="text-secondary" style="font-size: 0.72rem;">Fastest approved wins</small>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="glass-panel p-3 text-center">
+                                <i class="bi bi-ticket-perforated-fill fs-4" style="color:#f472b6;"></i>
+                                <div class="fw-bold small mt-1">Unique Pass ID</div>
+                                <small class="text-secondary" style="font-size: 0.72rem;">1 ticket per student</small>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="glass-panel p-3 text-center">
+                                <i class="bi bi-trophy-fill fs-4 text-warning"></i>
+                                <div class="fw-bold small mt-1">Live Rank Board</div>
+                                <small class="text-secondary" style="font-size: 0.72rem;">Top XP leaderboard</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Auth Panel -->
+                <div class="col-lg-6 anim-card" style="animation-delay: 0.1s;" id="authCard">
+                    <div class="glass-panel p-4 p-md-5" style="box-shadow: 0 25px 60px rgba(0,0,0,0.55);">
+                        <div class="text-center mb-3">
+                            <h3 class="fw-bold mb-1" id="authHeading">Create Your GLA Account</h3>
+                            <p class="small text-secondary mb-0" id="authSubtext">First choose how you want to join TaskHunt</p>
+                        </div>
+
+                        <div class="auth-tabs">
+                            <button type="button" class="auth-tab-btn active" id="registerTabBtn" onclick="switchAuthTab('register')">
+                                <i class="bi bi-person-plus-fill me-1"></i>Join / Sign Up
+                            </button>
+                            <button type="button" class="auth-tab-btn" id="loginTabBtn" onclick="switchAuthTab('login')">
+                                <i class="bi bi-box-arrow-in-right me-1"></i>Sign In
+                            </button>
+                        </div>
+
+                        <div id="inlineAlert" class="alert d-none py-2 small rounded-3"></div>
+
+                        <!-- SIGN UP FORM (Role-First Conditional Onboarding) -->
+                        <form id="registerForm">
+                            <label class="form-label small fw-bold text-info mb-2">Step 1: Select How You Want to Join</label>
+                            <div class="row g-2 mb-3">
+                                <div class="col-4">
+                                    <div class="role-choice-card" id="roleCard-student" onclick="selectJoinRole('student')">
+                                        <i class="bi bi-mortarboard-fill fs-3 text-info d-block mb-1"></i>
+                                        <div class="fw-bold small">Student</div>
+                                        <small class="text-secondary" style="font-size: 0.68rem;">Roll No. Required</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="role-choice-card" id="roleCard-teacher" onclick="selectJoinRole('teacher')">
+                                        <i class="bi bi-person-workspace fs-3 text-success d-block mb-1"></i>
+                                        <div class="fw-bold small">Teacher</div>
+                                        <small class="text-secondary" style="font-size: 0.68rem;">Faculty ID Required</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="role-choice-card" id="roleCard-club" onclick="selectJoinRole('club')">
+                                        <i class="bi bi-stars fs-3" style="color:#f472b6;"></i>
+                                        <div class="fw-bold small mt-1">Club Member</div>
+                                        <small class="text-secondary" style="font-size: 0.68rem;">Club Role Required</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="hidden" id="regRole" required>
+
+                            <!-- Revealed Once Role Is Picked -->
+                            <div id="roleFieldsWrapper" class="d-none anim-card">
+                                <div class="alert py-2 px-3 small rounded-3 mb-3" id="roleConditionBanner"
+                                     style="background: rgba(6, 182, 212, 0.14); border: 1px solid rgba(6, 182, 212, 0.35); color: #cffafe;">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label small text-light" id="regNameLabel">Full Name</label>
+                                    <input type="text" id="regName" class="form-control dark-input" placeholder="e.g., Ritik Kumar" required>
+                                </div>
+
+                                <!-- Conditional Student Field -->
+                                <div class="mb-3 d-none" id="studentRollGroup">
+                                    <label class="form-label small text-info fw-semibold">University Roll Number *</label>
+                                    <input type="text" id="regRollNumber" class="form-control dark-input mono-font" placeholder="e.g., 2442010462">
+                                </div>
+
+                                <!-- Conditional Teacher Fields -->
+                                <div class="row g-2 mb-3 d-none" id="teacherFieldsGroup">
+                                    <div class="col-6">
+                                        <label class="form-label small text-success fw-semibold">Faculty / Teacher ID *</label>
+                                        <input type="text" id="regFacultyId" class="form-control dark-input mono-font" placeholder="e.g., GLA-FAC-204">
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label small text-success fw-semibold">Department</label>
+                                        <input type="text" id="regDepartment" class="form-control dark-input" placeholder="e.g., Computer Apps">
+                                    </div>
+                                </div>
+
+                                <!-- Conditional Club Field -->
+                                <div class="mb-3 d-none" id="clubFieldsGroup">
+                                    <label class="form-label small fw-semibold" style="color:#f472b6;">Club Designation / Role *</label>
+                                    <input type="text" id="regClubPosition" class="form-control dark-input" placeholder="e.g., Club President / Event Coordinator">
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <label class="form-label small text-light">GLA University Email *</label>
+                                        <span class="small text-warning fw-semibold">Must end with @gla.ac.in</span>
+                                    </div>
+                                    <input type="email" id="regEmail" class="form-control dark-input" placeholder="name@gla.ac.in" required>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label small text-light">Create Password *</label>
+                                    <input type="password" id="regPassword" class="form-control dark-input" placeholder="Min. 6 characters" minlength="6" required>
+                                </div>
+
+                                <button type="submit" class="btn btn-neon-primary w-100">
+                                    Complete Registration <i class="bi bi-arrow-right ms-1"></i>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- LOGIN FORM -->
+                        <form id="loginForm" class="d-none">
+                            <div class="mb-3">
+                                <label class="form-label small text-light">GLA Email Address</label>
+                                <input type="email" id="email" class="form-control dark-input" placeholder="you@gla.ac.in" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label small text-light">Password</label>
+                                <input type="password" id="password" class="form-control dark-input" placeholder="••••••••" required>
+                            </div>
+                            <button type="submit" class="btn btn-neon-primary w-100">
+                                Launch Dashboard <i class="bi bi-rocket-takeoff-fill ms-1"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="alertBox" class="alert d-none"></div>
+    <script src="js/shared.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
