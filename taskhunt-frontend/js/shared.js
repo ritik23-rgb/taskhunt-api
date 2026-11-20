@@ -1,5 +1,5 @@
 // Single API URL for the whole app (change only this line when deploying to Render!)
-window.API_ROOT = 'http://localhost:5000/api';
+window.API_ROOT = 'https://taskhunt-api-1rq5.onrender.com/';
 
 window.escapeHtml = function(str) {
     return String(str ?? '')
